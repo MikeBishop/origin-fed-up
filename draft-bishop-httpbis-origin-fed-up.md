@@ -119,10 +119,18 @@ inspecting parties for up to this period of time, plus whatever time is required
 to detect the certificate after inclusion.  The "maximum merge delay" of most CT
 logs is twenty-four hours. [GoogleTrustedCT] [AppleTrustedCT]
 
-## OCSP Stapling {#ocsp}
+## OCSP
 
-Revocation checking has been a known challenge for TLS clients, with OCSP Stapling
-emerging as the solution of choice.  The server
+Revocation checking has been a known challenge for TLS clients, with OCSP
+Stapling emerging as the solution of choice.  While an OCSP endpoint can often
+be blocked by an attacker or otherwise be unavailable, the `status_request` TLS
+extension {{?RFC6066}} can enable a client to request and the server to provide
+a recent OCSP response as part of the TLS handshake.  This assists in verifying
+the non-revoked state of the certificate without invoking a single point of
+failure.
+
+However, OCSP responses typically have validity periods of 24 hours or more,
+and can be up to ten days.  
 
 # Security Considerations {#security}
 
