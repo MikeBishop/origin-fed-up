@@ -205,6 +205,8 @@ server as valid for an HTTP origin.
 - The fifth paragraph of Section 2.4 is deleted
 - The first three paragraphs of Section 4 are replaced with the contents of
   {{security}} from this document
+- The informative reference to {{!AltSvc}} (Section 5.2) is made a normative
+  reference (in Section 5.1)
 
 # Security Considerations {#security}
 
