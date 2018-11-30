@@ -45,7 +45,7 @@ informative:
 --- abstract
 
 The definition of the HTTP/2 ORIGIN frame "relaxes" the requirement to check DNS
-for various reasons.  However, experience has shown that such relaxation leads
+for various reasons. However, experience has shown that such relaxation leads
 to security risks and is inadvisable.  This document restores the original
 requirements.
 
