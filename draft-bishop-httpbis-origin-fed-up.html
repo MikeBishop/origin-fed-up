@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>DNS Security with HTTP/2 ORIGIN</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+
+body {
+  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 24px;
+  margin: 75px auto;
+  max-width: 624px;
+  padding: 0 5px;
+}
+
+.title, .filename, h1, h2, h3, h4, h5 {
+  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: bold;
+  color: #333;
+  line-height: 100%;
+  margin: 1.2em 0 0.3em;
+}
+.title, #rfc\.title h1 { font-size: 32px; }
+h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
+h3, section h4, h4, section h5 { font-size: 16px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header, table#rfc\.headerblock {
+  width: 100%;
+}
+table.header td, table#rfc\.headerblock td {
+  border: none;
+  background-color: transparent;
+  color: black;
+  padding: 0;
+}
+.filename {
+  display: block;
+  color: rgb(119, 119, 119);
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 100%;
+  margin: 10px 0 32px;
+}
+#rfc\.abstract+p, #rfc\.abstract p {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+samp, tt, code, pre {
+  font: 13.5px Consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure, caption {
+  font-style: italic;
+  margin: 0 1.5em;
+  text-align: left;
+}
+
+address {
+  margin: 16px 2px;
+  line-height: 20px;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn, address b {
+  font-weight: normal;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+p, ol, ul, li {
+  padding: 0;
+}
+p {
+  margin: 0.5em 0;
+}
+ol, ul {
+  margin: 0.2em 0 0.2em 2em;
+}
+li {
+  margin: 0.2em 0;
+}
+address {
+  font-style: normal;
+}
+
+ul.toc ul {
+  margin: 0 0 0 2em;
+}
+ul.toc li {
+  list-style: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 924px) {
+  body {
+    padding-right: 350px;
+  }
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    z-index: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>#rfc\.toc {
+    top: 55px;
+  }
+  body>ul.toc {
+    top: 100px;
+  }
+
+  ul.toc {
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  ul.toc ul {
+    margin-left: 1.2em;
+  }
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+  <meta name="viewport" content="initial-scale=1.0">
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.2" rel="Chapter" title="2 Some Alternative Means">
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 Certificate Transparency">
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 OCSP">
+<link href="#rfc.section.3" rel="Chapter" title="3 Balancing Privacy and Defense">
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Improving Privacy">
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Limiting Scope of Certificate Compromise">
+<link href="#rfc.section.3.3" rel="Chapter" title="3.3 Updates to RFC 8336">
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations">
+<link href="#rfc.section.5" rel="Chapter" title="5 IANA Considerations">
+<link href="#rfc.references" rel="Chapter" title="6 References">
+<link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="6.2 Informative References">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.12.3 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Bishop, M." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-bishop-httpbis-origin-fed-up-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-30" />
+  <meta name="dct.abstract" content="The definition of the HTTP/2 ORIGIN frame &#8220;relaxes&#8221; the requirement to check DNS for various reasons.  However, experience has shown that such relaxation leads to security risks and is inadvisable.  This document restores the original requirements." />
+  <meta name="description" content="The definition of the HTTP/2 ORIGIN frame &#8220;relaxes&#8221; the requirement to check DNS for various reasons.  However, experience has shown that such relaxation leads to security risks and is inadvisable.  This document restores the original requirements." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">HTTPbis</td>
+<td class="right">M. Bishop</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">Akamai</td>
+</tr>
+<tr>
+<td class="left">Updates: 8336 (if approved)</td>
+<td class="right">November 30, 2018</td>
+</tr>
+<tr>
+<td class="left">Intended status: Standards Track</td>
+<td class="right"></td>
+</tr>
+<tr>
+<td class="left">Expires: June 3, 2019</td>
+<td class="right"></td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">DNS Security with HTTP/2 ORIGIN<br />
+  <span class="filename">draft-bishop-httpbis-origin-fed-up-latest</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>The definition of the HTTP/2 ORIGIN frame &#8220;relaxes&#8221; the requirement to check DNS for various reasons.  However, experience has shown that such relaxation leads to security risks and is inadvisable.  This document restores the original requirements.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on June 3, 2019.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">Some Alternative Means</a>
+</li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">Certificate Transparency</a>
+</li>
+<li>2.2.   <a href="#rfc.section.2.2">OCSP</a>
+</li>
+</ul><li>3.   <a href="#rfc.section.3">Balancing Privacy and Defense</a>
+</li>
+<ul><li>3.1.   <a href="#rfc.section.3.1">Improving Privacy</a>
+</li>
+<li>3.2.   <a href="#rfc.section.3.2">Limiting Scope of Certificate Compromise</a>
+</li>
+<li>3.3.   <a href="#rfc.section.3.3">Updates to RFC 8336</a>
+</li>
+</ul><li>4.   <a href="#rfc.section.4">Security Considerations</a>
+</li>
+<li>5.   <a href="#rfc.section.5">IANA Considerations</a>
+</li>
+<li>6.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>6.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>6.2.   <a href="#rfc.references.2">Informative References</a>
+</li>
+</ul><li><a href="#rfc.authors">Author's Address</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p><a href="#ORIGIN" class="xref">[ORIGIN]</a> describes a method whereby an HTTP/2 server can enumerate the HTTP origins for which it purports to be authoritative.  This set can be greater or lesser than the set of origins over which the client might originally have considered the server to be authoritative.  Of course, the client will generally not send requests to a server unless it considers the server to be authoritative for that origin.</p>
+<p id="rfc.section.1.p.2">Section 2.4 of <a href="#ORIGIN" class="xref">[ORIGIN]</a> states that:</p>
+<p></p>
+
+<ul class="empty"><li>&#8230;clients &#8220;MAY avoid consulting DNS to establish the connection&#8217;s authority for new requests to origins in the Origin Set; however, those that do so face new risks, as explained in Section 4.</li></ul>
+<p id="rfc.section.1.p.4">In Section 4 of <a href="#ORIGIN" class="xref">[ORIGIN]</a>, the attacks this enables are described, along with the note that &#8220;Clients that blindly trust the ORIGIN frame&#8217;s contents will be vulnerable to a large number of attacks.  See Section 2.4 for mitigations.&#8221;</p>
+<p id="rfc.section.1.p.5">The mitigation recommended in Section 2.4 is to require the use of TLS and that the certificate presented be authoritative for the origin in question; the latter is a requirement already present in <a href="#HTTP2" class="xref">[HTTP2]</a> for HTTP/2 connections using TLS.  In Section 4, it is further recommended that:</p>
+<p></p>
+
+<ul class="empty"><li>&#8230;clients opting not to consult DNS ought to employ some alternative means to establish a high degree of confidence that the certificate is legitimate.</li></ul>
+<p id="rfc.section.1.p.7">Several methods of increasing certificate trust are referenced. However, during the discussion of <a href="#SecondaryCerts" class="xref">[SecondaryCerts]</a>, the ability to perform attacks using a misissued or compromised certificate has been a concern. These attacks are fundamentally enabled by the relaxation of the requirement to verify DNS ownership, and ongoing community concern about these attacks demonstrates that there is no longer consensus that these checks do not serve a purpose.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#some-alternative-means" id="some-alternative-means">Some Alternative Means</a>
+</h1>
+<p><a href="#ORIGIN" class="xref">[ORIGIN]</a> leaves open-ended the decision of when to consider the certificate alone sufficient to trust a server&#8217;s claim of authority over an origin.  However, it enumerates some possibilities:</p>
+<p></p>
+
+<ul class="empty"><li>For example, clients might skip consulting DNS only if they receive proof of inclusion in a Certificate Transparency log <a href="#RFC6962" class="xref">[RFC6962]</a> or if they have a recent Online Certificate Status Protocol (OCSP) response <a href="#RFC6960" class="xref">[RFC6960]</a> (possibly using the &#8220;status_request&#8221; TLS extension <a href="#RFC6066" class="xref">[RFC6066]</a>) showing that the certificate was not revoked.</li></ul>
+<p id="rfc.section.2.p.3">These mitigations are assuredly helpful in assuring general certificate validity, but they fail to fully prevent attacks from misissued or compromised certificates.  In particular, a certificate which is fraudulently obtained or compromised can remain usable by an attacker for nearly two weeks.</p>
+<h1 id="rfc.section.2.1">
+<a href="#rfc.section.2.1">2.1.</a> <a href="#ct" id="ct">Certificate Transparency</a>
+</h1>
+<p id="rfc.section.2.1.p.1">Certificate Transparency <a href="#RFC6962" class="xref">[RFC6962]</a> defines an experimental protocol for publicly logging the existence of Transport Layer Security (TLS) certificates as they are issued or observed, in a manner that allows anyone to audit certificate authority (CA) activity and notice the issuance of suspect certificates as well as to audit the certificate logs themselves.</p>
+<p id="rfc.section.2.1.p.2">The expectation is that domain owners (or agents acting on their behalf) would actively monitor such logs for domains they control, verify that any newly-issued certificates are in fact legitimate, and have the certificate revoked if not.</p>
+<p id="rfc.section.2.1.p.3">This does significantly reduce the odds of a misissued certificate having a long usable lifetime. However, it does not reduce that lifetime to zero.  A Signed Certificate Timestamp is not proof of inclusion in a Certificate Transparency log &#8211; it is a promise to include a certificate in a future log. Verification of certificate inclusion requires having a Signed Tree Head from that CT log which is newer than the SCT by at least that log&#8217;s &#8220;maximum merge delay.&#8221; <a href="#CertificateTransparency" class="xref">[CertificateTransparency]</a>  A misissued certificate remains invisible to inspecting parties for up to this period of time, plus whatever time is required to detect the certificate after inclusion.  The &#8220;maximum merge delay&#8221; of most CT logs is twenty-four hours. (See <a href="#GoogleTrustedCT" class="xref">[GoogleTrustedCT]</a>, <a href="#AppleTrustedCT" class="xref">[AppleTrustedCT]</a>.)</p>
+<h1 id="rfc.section.2.2">
+<a href="#rfc.section.2.2">2.2.</a> <a href="#ocsp" id="ocsp">OCSP</a>
+</h1>
+<p id="rfc.section.2.2.p.1">Revocation checking has been a known challenge for TLS clients, with OCSP Stapling emerging as the solution of choice.  While an OCSP endpoint can often be blocked by an attacker or otherwise be unavailable, the <samp>status_request</samp> TLS extension <a href="#RFC6066" class="xref">[RFC6066]</a> can enable a client to request and the server to provide a recent OCSP response as part of the TLS handshake.  This assists in verifying the non-revoked state of the certificate without creating a single point of failure.</p>
+<p id="rfc.section.2.2.p.2">However, the timeline for a revoked certificate still permits a surprising period of exercise, as described in <a href="#CABForum" class="xref">[CABForum]</a>:</p>
+<p></p>
+
+<ul>
+<li>CAs have up to 24 hours to revoke a compromised certificate after notification; longer for other reasons</li>
+<li>Certificate Revocation Lists and OCSP responses have a maximum validity period of ten days</li>
+</ul>
+<p id="rfc.section.2.2.p.4">This means that an attacker-held certificate remains potentially valid for use by an attacker for as long as eleven days following the discovery of a compromise or misissuance, plus any amount of time required to discover the situation.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#balancing-privacy-and-defense" id="balancing-privacy-and-defense">Balancing Privacy and Defense</a>
+</h1>
+<p id="rfc.section.3.p.1">One reason for avoiding the DNS resolution was the fact that DNS is typically performed over clear-text. In addition to the origin itself, other parties learn that the client is interested in contacting the origin:</p>
+<p></p>
+
+<ul>
+<li>The DNS server operator</li>
+<li>The client&#8217;s Internet Service Provider</li>
+<li>Other clients which can observe local network traffic</li>
+</ul>
+<p id="rfc.section.3.p.3">By avoiding a DNS resolution for an origin, clients can avoid these parties gaining additional information.  However, as described in this draft, doing so exposes clients to different security concerns.</p>
+<h1 id="rfc.section.3.1">
+<a href="#rfc.section.3.1">3.1.</a> <a href="#improving-privacy" id="improving-privacy">Improving Privacy</a>
+</h1>
+<p id="rfc.section.3.1.p.1">Given recent developments such as DNS over TLS <a href="#DoT" class="xref">[DoT]</a> and DNS over HTTPS <a href="#DoH" class="xref">[DoH]</a>, there are now alternative means to avoid disclosure of a client&#8217;s DNS activities to anyone other than the DNS server operator.</p>
+<p><a href="#DoT" class="xref">[DoT]</a> or <a href="#DoH" class="xref">[DoH]</a> SHOULD be used for DNS resolution when available in order to limit unnecessary disclosure of a client&#8217;s DNS activity to third parties.</p>
+<h1 id="rfc.section.3.2">
+<a href="#rfc.section.3.2">3.2.</a> <a href="#limiting-scope-of-certificate-compromise" id="limiting-scope-of-certificate-compromise">Limiting Scope of Certificate Compromise</a>
+</h1>
+<p id="rfc.section.3.2.p.1">In order to successfully use a fraudulent certificate, an attacker needs one of the following situations to occur:</p>
+<p></p>
+
+<ul>
+<li>The attacker controls the client&#8217;s DNS resolution and can provide its own IP address as that of the victim domain.</li>
+<li>The attacker controls the path between the client and the victim domain&#8217;s real address, and can hijack a TCP connection intended for the victim domain&#8217;s server</li>
+<li>The client supports <a href="#ORIGIN" class="xref">[ORIGIN]</a>, the fraudulent certificate contains both the victim domain and an attacker-controlled domain, and the attacker can induce the client to access an attacker-owned domain</li>
+<li>The client supports both <a href="#ORIGIN" class="xref">[ORIGIN]</a> and <a href="#SecondaryCerts" class="xref">[SecondaryCerts]</a>, and the attacker can induce the client to access an attacker-owned domain</li>
+</ul>
+<p id="rfc.section.3.2.p.3">Following the DNS verifications in <a href="#HTTP2" class="xref">[HTTP2]</a>, only the first two situations will result in the client considering the attacker authoritative for the victim domain.  However, if the client relaxes DNS checks as specified in <a href="#ORIGIN" class="xref">[ORIGIN]</a>, the latter two attack configurations become possible as well.</p>
+<p id="rfc.section.3.2.p.4">As a result, DNS resolution MUST continue to be performed prior to accepting a server as valid for an HTTP origin.</p>
+<h1 id="rfc.section.3.3">
+<a href="#rfc.section.3.3">3.3.</a> <a href="#updates-to-rfc-8336" id="updates-to-rfc-8336">Updates to RFC 8336</a>
+</h1>
+<p><a href="#ORIGIN" class="xref">[ORIGIN]</a> is modified as follows:</p>
+<p></p>
+
+<ul>
+<li>The fifth paragraph of Section 2.4 is deleted</li>
+<li>The first three paragraphs of Section 4 are replaced with the contents of <a href="#security" class="xref">Section 4</a> from this document</li>
+</ul>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a>
+</h1>
+<p id="rfc.section.4.p.1">Clients that blindly trust the ORIGIN frame&#8217;s contents will be vulnerable to a large number of attacks.</p>
+<p id="rfc.section.4.p.2">Omitting the requirement to consult DNS when determining authority for an origin would mean that an attacker who possesses a valid certificate no longer needs to be on path to redirect traffic to them; instead of modifying DNS, they need only convince the user to visit another website in order to coalesce connections to the target onto their existing connection.</p>
+<p id="rfc.section.4.p.3">Before considering a server to be authoritative for any given origin, clients MUST validate that the destination IP address is valid for the origin either by direct DNS resolution or resolution of a validated Alternative Service <a href="#AltSvc" class="xref">[AltSvc]</a>.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#iana" id="iana">IANA Considerations</a>
+</h1>
+<p id="rfc.section.5.p.1">This document has no actions for IANA.</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">6.</a> References</h1>
+<h1 id="rfc.references.1">
+<a href="#rfc.references.1">6.1.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="AltSvc">[AltSvc]</b></td>
+<td class="top">
+<a>Nottingham, M.</a>, <a>McManus, P.</a> and <a>J. Reschke</a>, "<a href="https://tools.ietf.org/html/rfc7838">HTTP Alternative Services</a>", RFC 7838, DOI 10.17487/RFC7838, April 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="DoH">[DoH]</b></td>
+<td class="top">
+<a>Hoffman, P.</a> and <a>P. McManus</a>, "<a href="https://tools.ietf.org/html/rfc8484">DNS Queries over HTTPS (DoH)</a>", RFC 8484, DOI 10.17487/RFC8484, October 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="DoT">[DoT]</b></td>
+<td class="top">
+<a>Hu, Z.</a>, <a>Zhu, L.</a>, <a>Heidemann, J.</a>, <a>Mankin, A.</a>, <a>Wessels, D.</a> and <a>P. Hoffman</a>, "<a href="https://tools.ietf.org/html/rfc7858">Specification for DNS over Transport Layer Security (TLS)</a>", RFC 7858, DOI 10.17487/RFC7858, May 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="HTTP2">[HTTP2]</b></td>
+<td class="top">
+<a>Belshe, M.</a>, <a>Peon, R.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/rfc7540">Hypertext Transfer Protocol Version 2 (HTTP/2)</a>", RFC 7540, DOI 10.17487/RFC7540, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ORIGIN">[ORIGIN]</b></td>
+<td class="top">
+<a>Nottingham, M.</a> and <a>E. Nygren</a>, "<a href="https://tools.ietf.org/html/rfc8336">The ORIGIN HTTP/2 Frame</a>", RFC 8336, DOI 10.17487/RFC8336, March 2018.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.references.2">
+<a href="#rfc.references.2">6.2.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="AppleTrustedCT">[AppleTrustedCT]</b></td>
+<td class="top">"<a href="https://support.apple.com/en-us/HT205280">Certificate Transparency Policy</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="CABForum">[CABForum]</b></td>
+<td class="top">
+<a>CA/Browser Forum</a>, "<a href="https://cabforum.org/wp-content/uploads/CA-Browser-Forum-BR-1.6.1.pdf">Baseline Requirements for the Issuance and Management of Publicly-Trusted Certificates</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="CertificateTransparency">[CertificateTransparency]</b></td>
+<td class="top">"<a href="http://www.certificate-transparency.org/getting-started">Certificate Transparency: Getting Started</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="GoogleTrustedCT">[GoogleTrustedCT]</b></td>
+<td class="top">"<a href="https://www.gstatic.com/ct/log_list/log_list.json">List of Trusted CT Logs</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6066">[RFC6066]</b></td>
+<td class="top">
+<a>Eastlake 3rd, D.</a>, "<a href="https://tools.ietf.org/html/rfc6066">Transport Layer Security (TLS) Extensions: Extension Definitions</a>", RFC 6066, DOI 10.17487/RFC6066, January 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6960">[RFC6960]</b></td>
+<td class="top">
+<a>Santesson, S.</a>, <a>Myers, M.</a>, <a>Ankney, R.</a>, <a>Malpani, A.</a>, <a>Galperin, S.</a> and <a>C. Adams</a>, "<a href="https://tools.ietf.org/html/rfc6960">X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP</a>", RFC 6960, DOI 10.17487/RFC6960, June 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6962">[RFC6962]</b></td>
+<td class="top">
+<a>Laurie, B.</a>, <a>Langley, A.</a> and <a>E. Kasper</a>, "<a href="https://tools.ietf.org/html/rfc6962">Certificate Transparency</a>", RFC 6962, DOI 10.17487/RFC6962, June 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="SecondaryCerts">[SecondaryCerts]</b></td>
+<td class="top">
+<a>Bishop, M.</a>, <a>Sullivan, N.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-httpbis-http2-secondary-certs-03">Secondary Certificate Authentication in HTTP/2</a>", Internet-Draft draft-ietf-httpbis-http2-secondary-certs-03, October 2018.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Mike Bishop</span> 
+	  <span class="n hidden">
+		<span class="family-name">Bishop</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Akamai</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:mbishop@evequefou.be">mbishop@evequefou.be</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
