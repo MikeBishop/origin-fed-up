@@ -73,7 +73,7 @@ Table of Contents
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
      6.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -282,6 +282,9 @@ Bishop                    Expires June 3, 2019                  [Page 5]
 Internet-Draft          DNS Security with ORIGIN           November 2018
 
 
+   o  The informative reference to [AltSvc] (Section 5.2) is made a
+      normative reference (in Section 5.1)
+
 4.  Security Considerations
 
    Clients that blindly trust the ORIGIN frame's contents will be
@@ -325,9 +328,6 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
               DOI 10.17487/RFC7540, May 2015,
               <https://www.rfc-editor.org/info/rfc7540>.
 
-   [ORIGIN]   Nottingham, M. and E. Nygren, "The ORIGIN HTTP/2 Frame",
-              RFC 8336, DOI 10.17487/RFC8336, March 2018,
-              <https://www.rfc-editor.org/info/rfc8336>.
 
 
 
@@ -337,6 +337,10 @@ Bishop                    Expires June 3, 2019                  [Page 6]
 
 Internet-Draft          DNS Security with ORIGIN           November 2018
 
+
+   [ORIGIN]   Nottingham, M. and E. Nygren, "The ORIGIN HTTP/2 Frame",
+              RFC 8336, DOI 10.17487/RFC8336, March 2018,
+              <https://www.rfc-editor.org/info/rfc8336>.
 
 6.2.  Informative References
 
@@ -378,6 +382,18 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
               Certificate Authentication in HTTP/2", draft-ietf-httpbis-
               http2-secondary-certs-03 (work in progress), October 2018.
 
+
+
+
+
+
+
+
+Bishop                    Expires June 3, 2019                  [Page 7]
+
+Internet-Draft          DNS Security with ORIGIN           November 2018
+
+
 Author's Address
 
    Mike Bishop
@@ -389,4 +405,44 @@ Author's Address
 
 
 
-Bishop                    Expires June 3, 2019                  [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bishop                    Expires June 3, 2019                  [Page 8]
