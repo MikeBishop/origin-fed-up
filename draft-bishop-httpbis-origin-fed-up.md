@@ -183,11 +183,11 @@ one of the following situations to occur:
 - The attacker controls the path between the client and the victim domain's real
   address, and can hijack a TCP connection intended for the victim domain's
   server
-- The fraudulent certificate contains both the victim domain and an
-  attacker-controlled domain, and the attacker can induce the client to access
-  the attacker-owned domain
-- The client supports {{?SecondaryCerts}}, and the attacker can induce the
-  client to access the attacker-owned domain
+- The client supports {{!ORIGIN}}, the fraudulent certificate contains both the
+  victim domain and an attacker-controlled domain, and the attacker can induce
+  the client to access an attacker-owned domain
+- The client supports both {{!ORIGIN}} and {{?SecondaryCerts}}, and the attacker
+  can induce the client to access an attacker-owned domain
 
 Following the DNS verifications in {{!HTTP2}}, only the first two situations
 will result in the client considering the attacker authoritative for the victim
