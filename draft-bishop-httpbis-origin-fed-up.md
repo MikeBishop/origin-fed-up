@@ -170,7 +170,7 @@ Given recent developments such as DNS over TLS {{!DoT=RFC7858}} and DNS over
 HTTPS {{!DoH=RFC8484}}, there are now alternative means to avoid disclosure of a
 client's DNS activities to anyone other than the DNS server operator.
 
-{{!DoT}} and {{!DoH}} SHOULD be used for DNS resolution when available in order
+{{!DoT}} or {{!DoH}} SHOULD be used for DNS resolution when available in order
 to limit unnecessary disclosure of a client's DNS activity to third parties.
 
 ## Limiting Scope of Certificate Compromise
