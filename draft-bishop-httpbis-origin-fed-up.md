@@ -150,11 +150,15 @@ by an attacker for as long as eleven days following the discovery of a
 compromise or misissuance, plus any amount of time required to discover the
 situation.
 
-# Balancing Privacy and Defense
+# Balancing Concerns
 
-One reason for avoiding the DNS resolution was the fact that DNS is typically
-performed over clear-text. In addition to the origin itself, other parties learn
-that the client is interested in contacting the origin:
+The primary reasons for avoiding the DNS resolution were two-fold.  First and
+more simply, there is a latency cost to performing DNS resolutions, and this
+permits clients to minimize latency before issuing requests.
+
+Second and more serious is the fact that DNS is typically performed over
+clear-text. In addition to the origin itself, other parties learn that the
+client is interested in contacting the origin:
 
 - The DNS server operator
 - The client's Internet Service Provider
@@ -197,7 +201,6 @@ the latter two attack configurations become possible as well.
 As a result, DNS resolution MUST continue to be performed prior to accepting a
 server as valid for an HTTP origin.
 
-
 ## Updates to RFC 8336
 
 {{!ORIGIN}} is modified as follows:
@@ -207,6 +210,7 @@ server as valid for an HTTP origin.
   {{security}} from this document
 - The informative reference to {{!AltSvc}} (Section 5.2) is made a normative
   reference (in Section 5.1)
+
 
 # Security Considerations {#security}
 
