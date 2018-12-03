@@ -285,7 +285,7 @@ ul.toc li {
 <link href="#rfc.section.2" rel="Chapter" title="2 Some Alternative Means">
 <link href="#rfc.section.2.1" rel="Chapter" title="2.1 Certificate Transparency">
 <link href="#rfc.section.2.2" rel="Chapter" title="2.2 OCSP">
-<link href="#rfc.section.3" rel="Chapter" title="3 Balancing Privacy and Defense">
+<link href="#rfc.section.3" rel="Chapter" title="3 Balancing Concerns">
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Improving Privacy">
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Limiting Scope of Certificate Compromise">
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Updates to RFC 8336">
@@ -302,7 +302,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bishop, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-bishop-httpbis-origin-fed-up-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-30" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-03" />
   <meta name="dct.abstract" content="The definition of the HTTP/2 ORIGIN frame &#8220;relaxes&#8221; the requirement to check DNS for various reasons. However, experience has shown that such relaxation leads to security risks and is inadvisable.  This document restores the original requirements." />
   <meta name="description" content="The definition of the HTTP/2 ORIGIN frame &#8220;relaxes&#8221; the requirement to check DNS for various reasons. However, experience has shown that such relaxation leads to security risks and is inadvisable.  This document restores the original requirements." />
 
@@ -323,14 +323,14 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left">Updates: 8336 (if approved)</td>
-<td class="right">November 30, 2018</td>
+<td class="right">December 3, 2018</td>
 </tr>
 <tr>
 <td class="left">Intended status: Standards Track</td>
 <td class="right"></td>
 </tr>
 <tr>
-<td class="left">Expires: June 3, 2019</td>
+<td class="left">Expires: June 6, 2019</td>
 <td class="right"></td>
 </tr>
 
@@ -347,7 +347,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 3, 2019.</p>
+<p>This Internet-Draft will expire on June 6, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -365,7 +365,7 @@ ul.toc li {
 </li>
 <li>2.2.   <a href="#rfc.section.2.2">OCSP</a>
 </li>
-</ul><li>3.   <a href="#rfc.section.3">Balancing Privacy and Defense</a>
+</ul><li>3.   <a href="#rfc.section.3">Balancing Concerns</a>
 </li>
 <ul><li>3.1.   <a href="#rfc.section.3.1">Improving Privacy</a>
 </li>
@@ -430,9 +430,10 @@ ul.toc li {
 </ul>
 <p id="rfc.section.2.2.p.4">This means that an attacker-held certificate remains potentially valid for use by an attacker for as long as eleven days following the discovery of a compromise or misissuance, plus any amount of time required to discover the situation.</p>
 <h1 id="rfc.section.3">
-<a href="#rfc.section.3">3.</a> <a href="#balancing-privacy-and-defense" id="balancing-privacy-and-defense">Balancing Privacy and Defense</a>
+<a href="#rfc.section.3">3.</a> <a href="#balancing-concerns" id="balancing-concerns">Balancing Concerns</a>
 </h1>
-<p id="rfc.section.3.p.1">One reason for avoiding the DNS resolution was the fact that DNS is typically performed over clear-text. In addition to the origin itself, other parties learn that the client is interested in contacting the origin:</p>
+<p id="rfc.section.3.p.1">The primary reasons for avoiding the DNS resolution were two-fold.  First and more simply, there is a latency cost to performing DNS resolutions, and this permits clients to minimize latency before issuing requests.</p>
+<p id="rfc.section.3.p.2">Second and more serious is the fact that DNS is typically performed over clear-text. In addition to the origin itself, other parties learn that the client is interested in contacting the origin:</p>
 <p></p>
 
 <ul>
@@ -440,7 +441,7 @@ ul.toc li {
 <li>The client&#8217;s Internet Service Provider</li>
 <li>Other clients which can observe local network traffic</li>
 </ul>
-<p id="rfc.section.3.p.3">By avoiding a DNS resolution for an origin, clients can avoid these parties gaining additional information.  However, as described in this draft, doing so exposes clients to different security concerns.</p>
+<p id="rfc.section.3.p.4">By avoiding a DNS resolution for an origin, clients can avoid these parties gaining additional information.  However, as described in this draft, doing so exposes clients to different security concerns.</p>
 <h1 id="rfc.section.3.1">
 <a href="#rfc.section.3.1">3.1.</a> <a href="#improving-privacy" id="improving-privacy">Improving Privacy</a>
 </h1>

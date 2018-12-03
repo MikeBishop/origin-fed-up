@@ -4,9 +4,9 @@
 
 HTTPbis                                                        M. Bishop
 Internet-Draft                                                    Akamai
-Updates: 8336 (if approved)                            November 30, 2018
+Updates: 8336 (if approved)                             December 3, 2018
 Intended status: Standards Track
-Expires: June 3, 2019
+Expires: June 6, 2019
 
 
                     DNS Security with HTTP/2 ORIGIN
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 3, 2019.
+   This Internet-Draft will expire on June 6, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Bishop                    Expires June 3, 2019                  [Page 1]
+Bishop                    Expires June 6, 2019                  [Page 1]
 
-Internet-Draft          DNS Security with ORIGIN           November 2018
+Internet-Draft          DNS Security with ORIGIN           December 2018
 
 
 Table of Contents
@@ -64,7 +64,7 @@ Table of Contents
    2.  Some Alternative Means  . . . . . . . . . . . . . . . . . . .   3
      2.1.  Certificate Transparency  . . . . . . . . . . . . . . . .   3
      2.2.  OCSP  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   3.  Balancing Privacy and Defense . . . . . . . . . . . . . . . .   4
+   3.  Balancing Concerns  . . . . . . . . . . . . . . . . . . . . .   4
      3.1.  Improving Privacy . . . . . . . . . . . . . . . . . . . .   5
      3.2.  Limiting Scope of Certificate Compromise  . . . . . . . .   5
      3.3.  Updates to RFC 8336 . . . . . . . . . . . . . . . . . . .   5
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bishop                    Expires June 3, 2019                  [Page 2]
+Bishop                    Expires June 6, 2019                  [Page 2]
 
-Internet-Draft          DNS Security with ORIGIN           November 2018
+Internet-Draft          DNS Security with ORIGIN           December 2018
 
 
    Several methods of increasing certificate trust are referenced.
@@ -165,9 +165,9 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
 
 
 
-Bishop                    Expires June 3, 2019                  [Page 3]
+Bishop                    Expires June 6, 2019                  [Page 3]
 
-Internet-Draft          DNS Security with ORIGIN           November 2018
+Internet-Draft          DNS Security with ORIGIN           December 2018
 
 
    [CertificateTransparency] A misissued certificate remains invisible
@@ -201,12 +201,16 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
    discovery of a compromise or misissuance, plus any amount of time
    required to discover the situation.
 
-3.  Balancing Privacy and Defense
+3.  Balancing Concerns
 
-   One reason for avoiding the DNS resolution was the fact that DNS is
-   typically performed over clear-text.  In addition to the origin
-   itself, other parties learn that the client is interested in
-   contacting the origin:
+   The primary reasons for avoiding the DNS resolution were two-fold.
+   First and more simply, there is a latency cost to performing DNS
+   resolutions, and this permits clients to minimize latency before
+   issuing requests.
+
+   Second and more serious is the fact that DNS is typically performed
+   over clear-text.  In addition to the origin itself, other parties
+   learn that the client is interested in contacting the origin:
 
    o  The DNS server operator
 
@@ -214,17 +218,17 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
 
    o  Other clients which can observe local network traffic
 
+
+
+
+Bishop                    Expires June 6, 2019                  [Page 4]
+
+Internet-Draft          DNS Security with ORIGIN           December 2018
+
+
    By avoiding a DNS resolution for an origin, clients can avoid these
    parties gaining additional information.  However, as described in
    this draft, doing so exposes clients to different security concerns.
-
-
-
-
-Bishop                    Expires June 3, 2019                  [Page 4]
-
-Internet-Draft          DNS Security with ORIGIN           November 2018
-
 
 3.1.  Improving Privacy
 
@@ -270,17 +274,16 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
 
    o  The fifth paragraph of Section 2.4 is deleted
 
+
+
+
+Bishop                    Expires June 6, 2019                  [Page 5]
+
+Internet-Draft          DNS Security with ORIGIN           December 2018
+
+
    o  The first three paragraphs of Section 4 are replaced with the
       contents of Section 4 from this document
-
-
-
-
-
-Bishop                    Expires June 3, 2019                  [Page 5]
-
-Internet-Draft          DNS Security with ORIGIN           November 2018
-
 
    o  The informative reference to [AltSvc] (Section 5.2) is made a
       normative reference (in Section 5.1)
@@ -330,12 +333,9 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
 
 
 
-
-
-
-Bishop                    Expires June 3, 2019                  [Page 6]
+Bishop                    Expires June 6, 2019                  [Page 6]
 
-Internet-Draft          DNS Security with ORIGIN           November 2018
+Internet-Draft          DNS Security with ORIGIN           December 2018
 
 
    [ORIGIN]   Nottingham, M. and E. Nygren, "The ORIGIN HTTP/2 Frame",
@@ -389,9 +389,9 @@ Internet-Draft          DNS Security with ORIGIN           November 2018
 
 
 
-Bishop                    Expires June 3, 2019                  [Page 7]
+Bishop                    Expires June 6, 2019                  [Page 7]
 
-Internet-Draft          DNS Security with ORIGIN           November 2018
+Internet-Draft          DNS Security with ORIGIN           December 2018
 
 
 Author's Address
@@ -445,4 +445,4 @@ Author's Address
 
 
 
-Bishop                    Expires June 3, 2019                  [Page 8]
+Bishop                    Expires June 6, 2019                  [Page 8]
