@@ -155,6 +155,12 @@ by an attacker for as long as eleven days following the discovery of a
 compromise or misissuance, plus any amount of time required to discover the
 situation.
 
+Additionally, the fact that a certificate has not been revoked is not proof that
+the issuer was permitted to issue it in the first place.  An attacker-controlled
+CA could be used to hijack any site and could return a fully normal OCSP response.
+This indicates that OCSP without a publicly-auditable CT entry does not provide
+sufficient proof, especially when private CAs are trusted by the user agent.
+
 # Balancing Concerns
 
 The primary reasons for avoiding the DNS resolution were two-fold.  First and
