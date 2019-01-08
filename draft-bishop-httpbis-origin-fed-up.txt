@@ -3,10 +3,10 @@
 
 
 HTTPbis                                                        M. Bishop
-Internet-Draft                                                    Akamai
-Updates: 8336 (if approved)                             December 3, 2018
-Intended status: Standards Track
-Expires: June 6, 2019
+Internet-Draft                                                 E. Nygren
+Updates: 8336 (if approved)                                       Akamai
+Intended status: Standards Track                         January 8, 2019
+Expires: July 12, 2019
 
 
                     DNS Security with HTTP/2 ORIGIN
@@ -34,11 +34,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 6, 2019.
+   This Internet-Draft will expire on July 12, 2019.
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Bishop                    Expires June 6, 2019                  [Page 1]
+Bishop & Nygren           Expires July 12, 2019                 [Page 1]
 
-Internet-Draft          DNS Security with ORIGIN           December 2018
+Internet-Draft          DNS Security with ORIGIN            January 2019
 
 
 Table of Contents
@@ -67,13 +67,13 @@ Table of Contents
    3.  Balancing Concerns  . . . . . . . . . . . . . . . . . . . . .   4
      3.1.  Improving Privacy . . . . . . . . . . . . . . . . . . . .   5
      3.2.  Limiting Scope of Certificate Compromise  . . . . . . . .   5
-     3.3.  Updates to RFC 8336 . . . . . . . . . . . . . . . . . . .   5
+     3.3.  Updates to RFC 8336 . . . . . . . . . . . . . . . . . . .   6
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
      6.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bishop                    Expires June 6, 2019                  [Page 2]
+Bishop & Nygren           Expires July 12, 2019                 [Page 2]
 
-Internet-Draft          DNS Security with ORIGIN           December 2018
+Internet-Draft          DNS Security with ORIGIN            January 2019
 
 
    Several methods of increasing certificate trust are referenced.
@@ -165,9 +165,9 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
 
 
 
-Bishop                    Expires June 6, 2019                  [Page 3]
+Bishop & Nygren           Expires July 12, 2019                 [Page 3]
 
-Internet-Draft          DNS Security with ORIGIN           December 2018
+Internet-Draft          DNS Security with ORIGIN            January 2019
 
 
    [CertificateTransparency] A misissued certificate remains invisible
@@ -201,6 +201,13 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
    discovery of a compromise or misissuance, plus any amount of time
    required to discover the situation.
 
+   Additionally, the fact that a certificate has not been revoked is not
+   proof that the issuer was permitted to issue it in the first place.
+   An attacker-controlled CA could be used to hijack any site and could
+   return a fully normal OCSP response.  This indicates that OCSP
+   without a publicly-auditable CT entry does not provide sufficient
+   proof, especially when private CAs are trusted by the user agent.
+
 3.  Balancing Concerns
 
    The primary reasons for avoiding the DNS resolution were two-fold.
@@ -212,19 +219,18 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
    over clear-text.  In addition to the origin itself, other parties
    learn that the client is interested in contacting the origin:
 
+
+
+Bishop & Nygren           Expires July 12, 2019                 [Page 4]
+
+Internet-Draft          DNS Security with ORIGIN            January 2019
+
+
    o  The DNS server operator
 
    o  The client's Internet Service Provider
 
    o  Other clients which can observe local network traffic
-
-
-
-
-Bishop                    Expires June 6, 2019                  [Page 4]
-
-Internet-Draft          DNS Security with ORIGIN           December 2018
-
 
    By avoiding a DNS resolution for an origin, clients can avoid these
    parties gaining additional information.  However, as described in
@@ -236,9 +242,9 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
    HTTPS [DoH], there are now alternative means to avoid disclosure of a
    client's DNS activities to anyone other than the DNS server operator.
 
-   [DoT] or [DoH] SHOULD be used for DNS resolution when available in
-   order to limit unnecessary disclosure of a client's DNS activity to
-   third parties.
+   [DoT] or [DoH] can be used for DNS resolution when available in order
+   to limit unnecessary disclosure of a client's DNS activity to third
+   parties.
 
 3.2.  Limiting Scope of Certificate Compromise
 
@@ -268,19 +274,19 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
    As a result, DNS resolution MUST continue to be performed prior to
    accepting a server as valid for an HTTP origin.
 
+
+
+
+Bishop & Nygren           Expires July 12, 2019                 [Page 5]
+
+Internet-Draft          DNS Security with ORIGIN            January 2019
+
+
 3.3.  Updates to RFC 8336
 
    [ORIGIN] is modified as follows:
 
    o  The fifth paragraph of Section 2.4 is deleted
-
-
-
-
-Bishop                    Expires June 6, 2019                  [Page 5]
-
-Internet-Draft          DNS Security with ORIGIN           December 2018
-
 
    o  The first three paragraphs of Section 4 are replaced with the
       contents of Section 4 from this document
@@ -321,6 +327,17 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
               (DoH)", RFC 8484, DOI 10.17487/RFC8484, October 2018,
               <https://www.rfc-editor.org/info/rfc8484>.
 
+
+
+
+
+
+
+Bishop & Nygren           Expires July 12, 2019                 [Page 6]
+
+Internet-Draft          DNS Security with ORIGIN            January 2019
+
+
    [DoT]      Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
               and P. Hoffman, "Specification for DNS over Transport
               Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
@@ -330,13 +347,6 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
               Transfer Protocol Version 2 (HTTP/2)", RFC 7540,
               DOI 10.17487/RFC7540, May 2015,
               <https://www.rfc-editor.org/info/rfc7540>.
-
-
-
-Bishop                    Expires June 6, 2019                  [Page 6]
-
-Internet-Draft          DNS Security with ORIGIN           December 2018
-
 
    [ORIGIN]   Nottingham, M. and E. Nygren, "The ORIGIN HTTP/2 Frame",
               RFC 8336, DOI 10.17487/RFC8336, March 2018,
@@ -377,24 +387,19 @@ Internet-Draft          DNS Security with ORIGIN           December 2018
               Transparency", RFC 6962, DOI 10.17487/RFC6962, June 2013,
               <https://www.rfc-editor.org/info/rfc6962>.
 
+
+
+Bishop & Nygren           Expires July 12, 2019                 [Page 7]
+
+Internet-Draft          DNS Security with ORIGIN            January 2019
+
+
    [SecondaryCerts]
               Bishop, M., Sullivan, N., and M. Thomson, "Secondary
               Certificate Authentication in HTTP/2", draft-ietf-httpbis-
               http2-secondary-certs-03 (work in progress), October 2018.
 
-
-
-
-
-
-
-
-Bishop                    Expires June 6, 2019                  [Page 7]
-
-Internet-Draft          DNS Security with ORIGIN           December 2018
-
-
-Author's Address
+Authors' Addresses
 
    Mike Bishop
    Akamai
@@ -402,6 +407,10 @@ Author's Address
    Email: mbishop@evequefou.be
 
 
+   Erik Nygren
+   Akamai
+
+   Email: erik+ietf@nygren.org
 
 
 
@@ -436,13 +445,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-Bishop                    Expires June 6, 2019                  [Page 8]
+Bishop & Nygren           Expires July 12, 2019                 [Page 8]
