@@ -20,6 +20,11 @@ author:
     name: Mike Bishop
     organization: Akamai
     email: mbishop@evequefou.be
+  -
+    ins: E. Nygren
+    name: Erik Nygren
+    organization: Akamai
+    email: erik+ietf@nygren.org
 
 normative:
 
